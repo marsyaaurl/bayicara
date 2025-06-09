@@ -20,16 +20,22 @@ const NavbarNonLogin = () => {
 
       <div className="flex items-center gap-x-6 bg-transparent">
         <Link 
-          href="/Signup" 
+          href="/stimulasi" 
           className="bg-transparent text-sm font-medium text-background hover:text-secondary"
         >
-          Daftar
+          Stimulasi
         </Link>
         <Link 
-          href="/Login" 
+          href="/deteksi" 
           className="bg-transparent text-sm font-medium text-background hover:text-secondary"
         >
-          Masuk
+          Deteksi
+        </Link>
+        <Link 
+          href="/profil" 
+          className="bg-transparent text-sm font-medium text-background hover:text-secondary"
+        >
+          Profil
         </Link>
       </div>
     </nav>
