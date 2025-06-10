@@ -3,7 +3,17 @@
 import { useState } from 'react';
 import { Baby } from 'lucide-react';
 
-export default function MilestoneCard({ milestone }: { milestone: any }) {
+// LANGKAH 1: Definisikan interface untuk milestone di sini
+interface Milestone {
+  milestone_id: number;
+  usia: string;
+  title: string;
+  desc: string;
+  status: boolean;
+}
+
+// LANGKAH 2: Gunakan interface 'Milestone' sebagai tipe untuk props
+export default function MilestoneCard({ milestone }: { milestone: Milestone }) {
     const [isCompleted, setIsCompleted] = useState(milestone.status);
 
     const handleBerhasilClick = () => {
@@ -18,6 +28,7 @@ export default function MilestoneCard({ milestone }: { milestone: any }) {
                 <div className='flex flex-col items-center justify-center gap-y-4 px-3 py-5 rounded-lg bg-secondary'>
                     <Baby className='w-16 h-16 text-background bg-transparent' />
                     <div className='flex flex-col items-center justify-center gap-y-0 bg-transparent'>
+                        {/* Menggunakan optional chaining (?) untuk keamanan jika props tidak ada */}
                         <h3 className='bg-transparent text-background text-xl font-semibold'>{milestone?.usia}</h3>
                         <h4 className='bg-transparent text-background'>Bulan</h4>
                     </div>
@@ -27,10 +38,11 @@ export default function MilestoneCard({ milestone }: { milestone: any }) {
                     <p className='bg-transparent'>{milestone?.desc}</p>
                     <button 
                         onClick={handleBerhasilClick} 
-                        disabled={isCompleted} // Tombol non-aktif jika sudah selesai
+                        disabled={isCompleted}
                         className='w-full bg-secondary rounded-md h-8 font-semibold text-background disabled:bg-gray-400'
                     >
-                        {isCompleted ? false : true}
+                        {/* PERBAIKAN TAMBAHAN: Tampilkan teks, bukan boolean */}
+                        {isCompleted ? 'Sudah Berhasil' : 'Berhasil'}
                     </button>
                 </div>
             </div>
