@@ -28,8 +28,7 @@ export default function Signup() {
                     data: {
                         name: data.name
                     },
-                    // Opsi ini tetap berguna untuk mengarahkan setelah verifikasi email
-                    emailRedirectTo: `${window.location.origin}/Login`
+                    emailRedirectTo: `${process.env.NEXT_PUBLIC_SITE_URL}/Login`
                 }
             });
 
@@ -37,13 +36,10 @@ export default function Signup() {
                 console.error('Error signing up:', error.message);
                 alert(`Error: ${error.message}`);
             } else {
-                // PESAN ALERT DIUBAH
                 alert('Pendaftaran berhasil! Silakan cek email Anda untuk verifikasi.');
                 
-                // Form tetap dikosongkan agar pengguna bisa mendaftarkan akun lain jika perlu
                 setData({ email: '', name: '', password: '' });
 
-                // Baris router.push('/login') telah DIHAPUS
             }
         } catch (error) {
             console.error('An unexpected error occurred:', error);
