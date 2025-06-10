@@ -7,18 +7,21 @@ import { milestone } from '@/app/milestone';
 import MilestoneCard from '@/app/components/MilestoneCard';
 
 interface PageProps {
-  params: {
+  params: Promise<{
     milestone_id: string;
-  };
+  }>;
 }
 
-const DetailedMilestonePage = ({ params }: PageProps) => {
+// Change the component to an async function
+const DetailedMilestonePage = async ({ params }: PageProps) => {
+  const resolvedParams = await params; // Await the params
+
   const currentMilestone = milestone.find(
-    (item) => item.milestone_id === Number(params.milestone_id)
+    (item) => item.milestone_id === Number(resolvedParams.milestone_id)
   );
 
   if (!currentMilestone) {
-    notFound();
+    notFound(); // Handle the case where the milestone is not found
   }
 
   return (
@@ -33,7 +36,7 @@ const DetailedMilestonePage = ({ params }: PageProps) => {
             <h2 className='font-semibold bg-transparent'>
               Ulangi {currentMilestone.title} Saat Berinteraksi
             </h2>
-            <p>akjnckjsaadas</p>
+            <p>{currentMilestone.desc}</p> {/* Display the description */}
           </div>
         </div>
 
@@ -45,3 +48,4 @@ const DetailedMilestonePage = ({ params }: PageProps) => {
 };
 
 export default DetailedMilestonePage;
+

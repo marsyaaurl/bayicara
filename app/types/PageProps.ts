@@ -2,6 +2,6 @@
 
 export interface PageProps {
   params: {
-    milestone_id: string;
+    milestone_id: number;
   };
 }
