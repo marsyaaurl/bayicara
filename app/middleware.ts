@@ -8,18 +8,19 @@ export async function middleware(req: NextRequest) {
   const { data: { session } } = await supabase.auth.getSession();
   
   const protectedRoutes = ['/stimulasi'];
-  
-  const publicRoutes = ['/Login', '/Signup', '/'];
+  const authRoutes = ['/Login', '/Signup']; // Halaman auth yang gak boleh diakses kalau udah login
   
   const { pathname } = req.nextUrl;
   
+  // Jika tidak ada session dan mencoba akses protected route
   if (!session && protectedRoutes.some(route => pathname.startsWith(route))) {
     console.log('User not authenticated, redirecting to login');
     return NextResponse.redirect(new URL('/Login', req.url));
   }
   
-  if (session && pathname === '/Login') {
-    console.log('User already authenticated, redirecting to dashboard');
+  // Jika sudah ada session dan di halaman auth (Login/Signup), redirect ke stimulasi
+  if (session && authRoutes.includes(pathname)) {
+    console.log('User already authenticated, redirecting to stimulasi');
     return NextResponse.redirect(new URL('/stimulasi', req.url));
   }
   
