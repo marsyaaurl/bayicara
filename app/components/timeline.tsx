@@ -1,13 +1,11 @@
 'use client'
 
 import { CheckSquare } from 'lucide-react';
-import NavbarLoggedin from './NavbarLoggedin';
 import { milestone as initialMilestone } from '../milestone';
-import { useState } from 'react';
 import Link from 'next/link';
 
 const TimelineStimulasi = () => {
-  const [milestone, setMilestone] = useState(initialMilestone);
+  const milestone = initialMilestone;
 
   return (
     <div className="relative min-h-screen bg-background">

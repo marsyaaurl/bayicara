@@ -20,7 +20,7 @@ export default function Login() {
        }
 
        try {
-           let { data: sessionData, error } = await supabase.auth.signInWithPassword({
+            const { data: sessionData, error } = await supabase.auth.signInWithPassword({
                email: data.email,
                password: data.password
            });

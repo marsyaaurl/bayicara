@@ -18,7 +18,7 @@ const DetailedMilestonePage = async ({ params }: { params: { milestone_id: strin
                 <div className='flex gap-x-10 items-center justify-center mb-10'>
                     <div className='w-1/2'>
                         <h1 className="text-xl font-bold mb-1">Target</h1>
-                        <div className='flex bg-background rounded-xl shadow-lg px-5 py-6 gap-x-5 items-center justify-center'>
+                        <div className='flex bg-background items-start rounded-xl shadow-lg px-5 py-6 gap-x-5 justify-center'>
                             <div className='flex flex-col items-center justify-center gap-y-4 px-3 py-5 rounded-lg bg-secondary'>
                                 <Baby className='w-16 h-16 text-background bg-transparent' />
                                 <div className='flex flex-col items-center justify-center gap-y-0 bg-transparent'>
@@ -47,7 +47,7 @@ const DetailedMilestonePage = async ({ params }: { params: { milestone_id: strin
                 </div>
 
                 <ClientStoryGenerator milestone={currentMilestone} />
-            </div>
+            </div>  
             <Footer />
         </div>
     );
