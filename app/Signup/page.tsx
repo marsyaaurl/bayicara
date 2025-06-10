@@ -21,7 +21,7 @@ export default function Signup() {
         }
 
         try {
-            let { data: user, error } = await supabase.auth.signUp({
+            const { error } = await supabase.auth.signUp({
                 email: data.email,
                 password: data.password,
                 options: {

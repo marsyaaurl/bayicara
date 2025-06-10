@@ -7,7 +7,7 @@ const kronaOne = Krona_One({
   display: 'swap',
 });
 
-const NavbarNonLogin = () => {
+const NavbarLoggedin = () => {
   return (
     <nav className="flex items-center justify-between bg-primary h-16 px-8 rounded-b-2xl fixed top-0 w-full z-50">
       
@@ -42,4 +42,4 @@ const NavbarNonLogin = () => {
   );
 };
 
-export default NavbarNonLogin;
+export default NavbarLoggedin;
