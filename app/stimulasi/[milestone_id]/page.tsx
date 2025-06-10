@@ -1,13 +1,18 @@
-import { notFound } from 'next/navigation'; 
-import HeaderStimulasi from '../../components/HeaderStimulasi';
+import { notFound } from 'next/navigation';
+import HeaderStimulasi from '@/app/components/HeaderStimulasi';
 import NavbarLoggedin from '../../components/NavbarLoggedin';
 import Footer from '../../components/Footer';
 import ClientStoryGenerator from '../../components/ClientStoryGenerator';
 import { milestone } from '../../milestone';
 import MilestoneCard from '../../components/MilestoneCard';
-import type { PageProps } from '../../types/PageProps';
 
-const DetailedMilestonePage = async ({ params }: PageProps) => {
+interface PageProps {
+  params: {
+    milestone_id: string;
+  };
+}
+
+const DetailedMilestonePage = ({ params }: PageProps) => {
   const currentMilestone = milestone.find(
     (item) => item.milestone_id === Number(params.milestone_id)
   );
@@ -23,6 +28,7 @@ const DetailedMilestonePage = async ({ params }: PageProps) => {
       <div className='mx-5 py-8 px-4'>
         <div className='flex gap-x-10 items-center justify-center mb-10'>
           <MilestoneCard milestone={currentMilestone} />
+
           <div className='flex flex-col gap-y-4 w-1/2'>
             <h2 className='font-semibold bg-transparent'>
               Ulangi {currentMilestone.title} Saat Berinteraksi
@@ -30,6 +36,7 @@ const DetailedMilestonePage = async ({ params }: PageProps) => {
             <p>akjnckjsaadas</p>
           </div>
         </div>
+
         <ClientStoryGenerator milestone={currentMilestone} />
       </div>
       <Footer />
