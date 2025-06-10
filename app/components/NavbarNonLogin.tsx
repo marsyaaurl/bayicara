@@ -1,3 +1,5 @@
+'use client';
+
 import Link from 'next/link';
 import { Krona_One } from 'next/font/google';
 
