@@ -1,54 +1,55 @@
-// middleware.ts
-import { NextResponse, NextRequest } from "next/server";
+import { createMiddlewareClient } from "@supabase/auth-helpers-nextjs";
+import { NextRequest, NextResponse } from "next/server";
 
 export async function middleware(req: NextRequest) {
+  const res = NextResponse.next();
+  const supabase = createMiddlewareClient({ req, res });
+
+  const { data: { session } } = await supabase.auth.getSession();
+
+  const protectedRoutes = ['/stimulasi'];
+  const authRoutes = ['/Login', '/Signup'];
+
   const { pathname } = req.nextUrl;
 
-  // --- TEST REDIRECT PAKSA UNTUK /stimulasi ---
-  // Ini akan mengalihkan SEMUA akses ke /stimulasi ke /Login, tanpa peduli sesi
-  if (pathname.startsWith('/stimulasi')) {
-    console.log('--- TEST: Mengalihkan paksa /stimulasi ke /Login ---'); // Ini seharusnya muncul di log jika berhasil
-    return NextResponse.redirect(new URL('/Login', req.url));
+  // Debug logs
+  console.log('=== MIDDLEWARE DEBUG ===');
+  console.log('Path:', pathname);
+  console.log('Session exists:', !!session);
+  console.log('Session user:', session?.user?.email || 'No user');
+
+  // New logic for the root path '/'
+  if (pathname === '/') {
+    if (session) {
+      // If user is authenticated, redirect from '/' to '/stimulasi'
+      console.log('✅ User authenticated on root, redirecting to /stimulasi');
+      return NextResponse.redirect(new URL('/stimulasi', req.url));
+    } else {
+      // If user is not authenticated, redirect from '/' to '/Login'
+      console.log('❌ User not authenticated on root, redirecting to /Login');
+      return NextResponse.redirect(new URL('/Login', req.url));
+    }
   }
-  // --- AKHIR TEST ---
 
+  // Fungsi untuk memeriksa apakah pathname cocok dengan salah satu protectedRoutes
+  const isProtectedRoute = protectedRoutes.some(route => pathname.startsWith(route));
 
-  // Kode middleware Anda yang sebelumnya (sisakan saja jika mau, tapi yang di atas adalah fokusnya)
-  const res = NextResponse.next();
-  // const supabase = createMiddlewareClient({ req, res }); // Uncomment jika perlu
-  // const { data: { session } } = await supabase.auth.getSession(); // Uncomment jika perlu
+  // Jika tidak ada session dan mencoba akses protected route
+  if (!session && isProtectedRoute) {
+    console.log('❌ User not authenticated, redirecting to login');
+    // Simpan URL yang dicoba diakses sebelum redirect ke login
+    const redirectUrl = new URL('/Login', req.url);
+    redirectUrl.searchParams.set('next', pathname); // Menyimpan pathname asli
+    return NextResponse.redirect(redirectUrl);
+  }
 
-  // console.log('=== MIDDLEWARE DEBUG ==='); // Uncomment jika perlu
-  // console.log('Path:', pathname); // Uncomment jika perlu
-  // console.log('Session exists:', !!session); // Uncomment jika perlu
-  // console.log('Session user:', session?.user?.email || 'No user'); // Uncomment jika perlu
+  // Jika sudah ada session dan di halaman auth (Login/Signup), redirect ke stimulasi
+  if (session && authRoutes.includes(pathname)) {
+    console.log('✅ User already authenticated, redirecting to stimulasi');
+    return NextResponse.redirect(new URL('/stimulasi', req.url));
+  }
 
-
-  // if (pathname === '/') {
-  //   if (session) {
-  //     return NextResponse.redirect(new URL('/stimulasi', req.url));
-  //   } else {
-  //     return NextResponse.redirect(new URL('/Login', req.url));
-  //   }
-  // }
-
-  // const protectedRoutes = ['/stimulasi'];
-  // const authRoutes = ['/Login', '/Signup'];
-  // const isProtectedRoute = protectedRoutes.some(route => pathname.startsWith(route));
-
-  // if (!session && isProtectedRoute) {
-  //   console.log('❌ User not authenticated, redirecting to login');
-  //   const redirectUrl = new URL('/Login', req.url);
-  //   redirectUrl.searchParams.set('next', pathname);
-  //   return NextResponse.redirect(redirectUrl);
-  // }
-
-  // if (session && authRoutes.includes(pathname)) {
-  //   console.log('✅ User already authenticated, redirecting to stimulasi');
-  //   return NextResponse.redirect(new URL('/stimulasi', req.url));
-  // }
-
-  console.log('✅ Allowing access to:', pathname); // Ini log terakhir yang mungkin muncul
+  console.log('✅ Allowing access to:', pathname);
   return res;
 }
 
