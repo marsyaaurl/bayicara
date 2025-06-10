@@ -18,6 +18,19 @@ export async function middleware(req: NextRequest) {
   console.log('Session exists:', !!session);
   console.log('Session user:', session?.user?.email || 'No user');
 
+  // New logic for the root path '/'
+  if (pathname === '/') {
+    if (session) {
+      // If user is authenticated, redirect from '/' to '/stimulasi'
+      console.log('✅ User authenticated on root, redirecting to /stimulasi');
+      return NextResponse.redirect(new URL('/stimulasi', req.url));
+    } else {
+      // If user is not authenticated, redirect from '/' to '/Login'
+      console.log('❌ User not authenticated on root, redirecting to /Login');
+      return NextResponse.redirect(new URL('/Login', req.url));
+    }
+  }
+
   // Fungsi untuk memeriksa apakah pathname cocok dengan salah satu protectedRoutes
   const isProtectedRoute = protectedRoutes.some(route => pathname.startsWith(route));
 
