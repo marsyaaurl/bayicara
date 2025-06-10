@@ -17,11 +17,9 @@ const TimelineStimulasi = () => {
             <div key={item.milestone_id} className="relative flex items-start mb-8 last:mb-0">
               {/* Icon */}
               <div
-                className={`z-10 flex items-center justify-center w-16 h-16 rounded-full shadow-lg ${
-                  item.status ? 'bg-primary text-white' : 'bg-gray-400 text-white'
-                }`}
+                className='z-10 flex items-center justify-center w-16 h-16 rounded-full shadow-lg bg-primary'
               >
-                <CheckSquare className="w-9 h-9 bg-transparent" />
+                <h1 className="flex font-semibold text-3xl text-background w-9 h-9 bg-transparent items-center justify-center">{item.milestone_id}</h1>
               </div>
 
               {/* Content */}

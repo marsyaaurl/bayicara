@@ -31,22 +31,6 @@ const DetailedMilestonePage = async ({ params }: PageProps) => {
       <div className='mx-5 py-8 px-4'>
         <div className='flex gap-x-10 items-center justify-center mb-10'>
           <MilestoneCard milestone={currentMilestone} />
-
-          <div className='w-1/2 flex flex-col gap-y-4'>
-            <h1 className='font-bold text-xl'>Tips</h1>
-            <div className='flex flex-col'>
-              <h2 className='font-semibold bg-transparent'>
-                Ulangi {currentMilestone.title} Saat Berinteraksi
-              </h2>
-              <p>{currentMilestone.desc}</p> {/* Display the description */}
-            </div>
-            <div className='flex flex-col'>
-              <h2 className='font-semibold bg-transparent'>
-                Ulangi {currentMilestone.title} Saat Berinteraksi
-              </h2>
-              <p>{currentMilestone.desc}</p> {/* Display the description */}
-            </div>
-          </div>
         </div>
 
         <ClientStoryGenerator milestone={currentMilestone} />

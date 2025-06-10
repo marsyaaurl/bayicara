@@ -5,35 +5,49 @@ import { Brain } from 'lucide-react';
 
 interface Props {
     milestone: {
+        milestone_id: number;
         usia: string;
         title: string;
+        desc: string;
+        status: boolean;
+        target: string[];
+        tips: string[];
     } | undefined;
 }
 
 const ClientStoryGenerator = ({ milestone }: Props) => {
     const [output, setOutput] = useState<string | null>(null);
+    const [userKeywords, setSetUserKeywords] = useState('');
 
     const prompt = `
-    Anda adalah seorang penulis cerita anak yang kreatif. 
-    Tuliskan sebuah **cerita pendek naratif** untuk anak usia ${milestone?.usia} bulan.
+    Anda adalah seorang penulis cerita anak yang kreatif dan ahli dalam perkembangan bahasa balita.
+    Tuliskan sebuah **cerita pendek naratif yang sederhana, menarik, dan fokus** untuk anak usia ${milestone?.usia} bulan.
 
-    Tema utama cerita ini adalah tentang melatih keterampilan: **"${milestone?.title}"**. 
-    Jadikan keterampilan ini sebagai **tujuan atau keinginan utama dari karakter** dalam cerita. 
-    Misalnya, jika keterampilannya adalah "Mengucapkan Mama Papa", ceritanya bisa tentang seekor anak burung yang sangat ingin memanggil induknya untuk pertama kali.
+    **Tema Utama Cerita:** Melatih keterampilan bahasa spesifik: **"${milestone?.title}"**.
+    Jadikan keterampilan ini sebagai **tujuan atau keinginan utama yang sangat jelas dari karakter** dalam cerita.
 
-    Cerita harus memiliki:
-    1. Tokoh hewan, manusia, atau benda yang lucu dan mudah diidentifikasi.
-    2. Alur cerita yang sangat sederhana (awal, tengah, akhir).
-    3. Akhir yang bahagia dan memuaskan.
+    **Detail Penting untuk Diintegrasikan dalam Cerita (Ambil dari data milestone):**
+    * **Inti Keterampilan:** Gunakan deskripsi umum dari "${milestone?.desc}" sebagai esensi dari tujuan karakter dan apa yang ia pelajari.
+    * **Target Spesifik:** Ceritakan bagaimana karakter **berusaha dan/atau berhasil** melakukan salah satu atau beberapa dari target-target spesifik ini: "${milestone?.target.join('; ')}". Gabungkan upaya atau keberhasilan ini secara mulus dalam alur cerita.
+    * **Elemen Stimulasi (Tips):** Secara natural, sisipkan ide atau aktivitas yang terinspirasi dari tips stimulasi berikut ke dalam narasi atau interaksi karakter di dalam cerita: "${milestone?.tips.join('; ')}". Buat tips ini menjadi bagian alami dari lingkungan atau tindakan pendukung.
+    ${userKeywords ? `* **Kata Kunci Tambahan dari Orang Tua:** Pastikan untuk menyertakan dan mengintegrasikan secara natural elemen-elemen atau konsep-konsep berikut dalam cerita: "${userKeywords}".` : ''}
+    
+    **Cerita harus memiliki:**
+    1.  Tokoh utama (hewan, manusia, atau benda) yang lucu, menggemaskan, memiliki nama sederhana, dan mudah diidentifikasi oleh balita.
+    2.  Alur cerita yang sangat sederhana:
+        * **Awal:** Perkenalkan karakter dan keinginan kuatnya terkait keterampilan utama.
+        * **Tengah:** Tunjukkan usaha/percobaan karakter dalam mencapai tujuan, dengan memasukkan target spesifik dari milestone.
+        * **Akhir:** Karakter berhasil menguasai keterampilan tersebut dengan cara yang bahagia dan memuaskan.
+    3.  Akhir cerita yang positif dan ceria.
 
-    **PENTING:**
-    - **JANGAN** sertakan instruksi dalam kurung untuk orang tua seperti "(Ulangi beberapa kali...)".
-    - **JANGAN** ada deskripsi gambar seperti "(Gambar: Bola merah)".
-    - **Fokus murni pada alur cerita**, bukan pada panduan interaktif.
-
-    Gunakan bahasa yang lembut, positif, dan mudah dipahami anak minimal 3 paragraf.
-
-    Buat susunan ceritanya mudah dibaca juga oleh orang tua
+    **PENTING (Gaya Bahasa & Larangan Keras):**
+    -   **Pengulangan Kata Kunci:** Sisipkan **pengulangan kata atau frasa kunci** yang relevan dengan "${milestone?.title}" dan poin-poin dari **target spesifik** Anda secara **natural dalam narasi atau dialog karakter** untuk membantu stimulasi bahasa anak.
+    -   Gunakan bahasa yang lembut, positif, dan mudah dipahami anak.
+    -   **Fokus murni pada alur cerita naratif**, bukan pada panduan interaktif atau instruksi.
+    -   **JANGAN** sertakan instruksi dalam kurung untuk orang tua (misalnya: "(Ulangi beberapa kali...)").
+    -   **JANGAN** ada deskripsi gambar atau petunjuk visual (misalnya: "(Gambar: Bola merah)").
+    -   Buat susunan ceritanya mudah dibaca juga oleh orang tua.
+    -   Pertahankan cerita sebagai **narasi tunggal yang mengalir**, tanpa pemisahan paragraf eksplisit yang ketat, namun dengan alur yang jelas.
     `;
 
     const generateText = async () => {
@@ -60,25 +74,33 @@ const ClientStoryGenerator = ({ milestone }: Props) => {
     return (
         <div>
             <h1 className="text-xl font-bold mb-2">Buat Cerita</h1>
-            <div className='flex justify-center gap-x-5'>
-                <Brain className='w-16 h-16 text-primary bg-transparent' />
-                <div>
-                    <p className='mb-2'>
+            <div className='flex flex-col justify-center gap-x-5'>
+                <div className='flex flex-row items-center justify-center gap-x-4'>
+                    <Brain className='w-16 h-16 text-primary bg-transparent' />
+                    <p className='mb-2 text-md text-gray-700'>
                         Yuk, bantu Si Kecil lebih aktif berbicara lewat cerita-cerita pendek yang seru. Buat dan gunakan cerita pendek untuk bermain dan stimulasi kemampuan bicara anak bersama.
                     </p>
+                </div>
+                <div>
+                    <textarea 
+                        placeholder='Masukkan kata kunci tambahan, seperti nama karakter, benda di sekitar, tempat tertentu, atau konsep lain yang ingin Ayah Bunda masukkan ke dalam cerita.'
+                        value={userKeywords}
+                        onChange={(e) => setSetUserKeywords(e.target.value)}
+                        className='w-full text-xs p-2 items-start justify-start h-20 border rounded-lg'
+                    />
                     <button
                         onClick={generateText}
-                        className='px-5 bg-secondary rounded-lg h-8 font-semibold text-background'
+                        className='px-5 bg-secondary rounded-lg h-8 font-semibold mb-5 text-background'
                     >
                         Buat Cerita
                     </button>
+                    {output && (
+                        <div className='w-full'>
+                            <p className='text-md text-gray-700'>{output}</p>
+                        </div>
+                    )}
                 </div>
             </div>
-            {output && (
-                <div className='mt-4 p-4 bg-background rounded-lg shadow-md'>
-                    <p>{output}</p>
-                </div>
-            )}
         </div>
     );
 };
