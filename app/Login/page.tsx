@@ -35,7 +35,7 @@ export default function Login() {
                console.log('Login successful:', sessionData);
                alert('Login berhasil!');
                // Arahkan ke root
-               router.push('/');
+               router.push('/stimulasi');
            } else {
                alert('Login gagal, periksa kembali email dan password Anda.');
            }
