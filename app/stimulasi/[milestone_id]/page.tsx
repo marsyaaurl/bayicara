@@ -1,10 +1,10 @@
 import { notFound } from 'next/navigation';
 import HeaderStimulasi from '@/app/components/HeaderStimulasi';
-import NavbarLoggedin from '../../components/NavbarLoggedin';
-import Footer from '../../components/Footer';
-import ClientStoryGenerator from '../../components/ClientStoryGenerator';
-import { milestone } from '../../milestone';
-import MilestoneCard from '../../components/MilestoneCard';
+import NavbarLoggedin from '@/app/components/NavbarLoggedin';
+import Footer from '@/app/components/Footer';
+import ClientStoryGenerator from '@/app/components/ClientStoryGenerator';
+import { milestone } from '@/app/milestone';
+import MilestoneCard from '@/app/components/MilestoneCard';
 
 interface PageProps {
   params: {
