@@ -1,16 +1,11 @@
 import { notFound } from 'next/navigation'; 
-import HeaderStimulasi from '@/app/components/HeaderStimulasi';
+import HeaderStimulasi from '../../components/HeaderStimulasi';
 import NavbarLoggedin from '../../components/NavbarLoggedin';
 import Footer from '../../components/Footer';
 import ClientStoryGenerator from '../../components/ClientStoryGenerator';
 import { milestone } from '../../milestone';
 import MilestoneCard from '../../components/MilestoneCard';
-
-interface PageProps {
-  params: {
-    milestone_id: string;
-  };
-}
+import type { PageProps } from '../../types/PageProps';
 
 const DetailedMilestonePage = async ({ params }: PageProps) => {
   const currentMilestone = milestone.find(
@@ -18,7 +13,7 @@ const DetailedMilestonePage = async ({ params }: PageProps) => {
   );
 
   if (!currentMilestone) {
-    notFound(); 
+    notFound();
   }
 
   return (
@@ -35,7 +30,6 @@ const DetailedMilestonePage = async ({ params }: PageProps) => {
             <p>akjnckjsaadas</p>
           </div>
         </div>
-
         <ClientStoryGenerator milestone={currentMilestone} />
       </div>
       <Footer />
