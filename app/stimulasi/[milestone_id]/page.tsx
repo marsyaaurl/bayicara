@@ -1,14 +1,39 @@
-// app/stimulasi/[milestone_id]/page.tsx
+import { notFound } from 'next/navigation'; 
+import HeaderStimulasi from '@/app/components/HeaderStimulasi';
+import NavbarLoggedin from '../../components/NavbarLoggedin';
+import Footer from '../../components/Footer';
+import ClientStoryGenerator from '../../components/ClientStoryGenerator';
+import { milestone } from '../../milestone';
+import MilestoneCard from '../../components/MilestoneCard';
 
-// TIDAK ADA 'use client'
-// TIDAK ADA 'async'
-// TIDAK ADA LOGIKA LAIN, HANYA INI
+const DetailedMilestonePage = async ({ params }: { params: { milestone_id: string } }) => {
+    const currentMilestone = milestone.find(
+        (item) => item.milestone_id === Number(params.milestone_id)
+    );
 
-export default function MinimalStimulasiPage({ params }: { params: { milestone_id: string } }) {
+    if (!currentMilestone) {
+        notFound(); 
+    }
+
     return (
         <div>
-            <h1>Halaman Tes Minimal</h1>
-            <p>ID Milestone yang diminta adalah: {params.milestone_id}</p>
+            <NavbarLoggedin />
+            <HeaderStimulasi />
+            <div className='mx-5 py-8 px-4'>
+                <div className='flex gap-x-10 items-center justify-center mb-10'>
+                    <MilestoneCard milestone={currentMilestone} />
+                    
+                    <div className='flex flex-col gap-y-4 w-1/2'>
+                        <h2 className='font-semibold bg-transparent'>Ulangi {currentMilestone.title} Saat Berinteraksi</h2>
+                        <p>akjnckjsaadas</p>
+                    </div>
+                </div>
+
+                <ClientStoryGenerator milestone={currentMilestone} />
+            </div>
+            <Footer />
         </div>
     );
-}
+};
+
+export default DetailedMilestonePage;
