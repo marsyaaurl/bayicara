@@ -28,7 +28,7 @@ export default function Signup() {
                     data: {
                         name: data.name
                     },
-                    emailRedirectTo: `${process.env.NEXT_PUBLIC_SITE_URL}/Login`
+                    emailRedirectTo: `https://bayicara.vercel.app/Login`
                 }
             });
 
