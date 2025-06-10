@@ -3,7 +3,6 @@
 import { useState } from 'react';
 import { Baby } from 'lucide-react';
 
-// LANGKAH 1: Definisikan interface untuk milestone di sini
 interface Milestone {
   milestone_id: number;
   usia: string;
@@ -12,7 +11,6 @@ interface Milestone {
   status: boolean;
 }
 
-// LANGKAH 2: Gunakan interface 'Milestone' sebagai tipe untuk props
 export default function MilestoneCard({ milestone }: { milestone: Milestone }) {
     const [isCompleted, setIsCompleted] = useState(milestone.status);
 
@@ -24,11 +22,10 @@ export default function MilestoneCard({ milestone }: { milestone: Milestone }) {
     return (
         <div className='w-1/2'>
             <h1 className="text-xl font-bold mb-1">Target</h1>
-            <div className='flex bg-background items-start rounded-xl shadow-lg px-5 py-6 gap-x-5 justify-center'>
+            <div className='flex bg-background items-center rounded-xl shadow-lg px-5 py-6 gap-x-5 justify-center'>
                 <div className='flex flex-col items-center justify-center gap-y-4 px-3 py-5 rounded-lg bg-secondary'>
                     <Baby className='w-16 h-16 text-background bg-transparent' />
                     <div className='flex flex-col items-center justify-center gap-y-0 bg-transparent'>
-                        {/* Menggunakan optional chaining (?) untuk keamanan jika props tidak ada */}
                         <h3 className='bg-transparent text-background text-xl font-semibold'>{milestone?.usia}</h3>
                         <h4 className='bg-transparent text-background'>Bulan</h4>
                     </div>
@@ -41,7 +38,6 @@ export default function MilestoneCard({ milestone }: { milestone: Milestone }) {
                         disabled={isCompleted}
                         className='w-full bg-secondary rounded-md h-8 font-semibold text-background disabled:bg-gray-400'
                     >
-                        {/* PERBAIKAN TAMBAHAN: Tampilkan teks, bukan boolean */}
                         {isCompleted ? 'Sudah Berhasil' : 'Berhasil'}
                     </button>
                 </div>
