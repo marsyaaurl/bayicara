@@ -38,6 +38,12 @@ const DetailedMilestonePage = async ({ params }: PageProps) => {
             </h2>
             <p>{currentMilestone.desc}</p> {/* Display the description */}
           </div>
+          <div className='flex flex-col gap-y-4 w-1/2'>
+            <h2 className='font-semibold bg-transparent'>
+              Ulangi {currentMilestone.title} Saat Berinteraksi
+            </h2>
+            <p>{currentMilestone.desc}</p> {/* Display the description */}
+          </div>
         </div>
 
         <ClientStoryGenerator milestone={currentMilestone} />
