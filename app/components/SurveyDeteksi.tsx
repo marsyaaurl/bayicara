@@ -8,7 +8,6 @@ import { useRouter } from 'next/navigation';
 const SurveyDeteksi = () => {
     const question = initialQuestions;
     const [answer, setAnswer] = useState<{ [key: number]: string }>({});
-    const [result, setResult] = useState<string | null>(null);
     const router = useRouter();
 
     const handleSubmit = async () => {
@@ -17,29 +16,30 @@ const SurveyDeteksi = () => {
             .join('\n');
 
         const prompt = `
-        Berikut adalah hasil survey deteksi speech delay dari pengguna:
+        Berikut adalah hasil survei deteksi dini speech delay dari pengguna:
 
         ${jawabanUser}
 
-        Tolong analisis apakah anak ini menunjukkan gejala keterlambatan perkembangan atau tidak.
+        Tolong analisis jawaban tersebut dan tentukan apakah anak menunjukkan tanda-tanda keterlambatan bicara atau tidak.
 
-        Gunakan panduan interpretasi berikut:
+        Gunakan standar berikut untuk interpretasi:
+        - Anak dianggap berisiko tinggi mengalami speech delay jika:
+        1. Memilih lebih dari 3 opsi berisiko di bagian B, C, dan/atau E.
+        2. Jawaban di bagian D menunjukkan keterlambatan signifikan berdasarkan usia.
 
-        ### Interpretasi Hasil
-        - Risiko Tinggi Speech Delay Jika:
-        - Memilih lebih dari 3 opsi berisiko di bagian B, C, dan E
-        - Jawaban di bagian D menunjukkan keterlambatan signifikan sesuai usia
+        Rekomendasi untuk konsultasi ke ahli patologi wicara-bahasa jika:
+        - Kosakata < 10 kata di usia 2 tahun
+        - Tidak dapat membuat kalimat 2 kata di usia 2,5 tahun
+        - Tidak memahami instruksi sederhana
 
-        ### Rekomendasi:
-        Konsultasikan ke ahli patologi wicara-bahasa jika ditemukan kondisi seperti:
-        - Kosakata kurang dari 10 kata di usia 2 tahun
-        - Tidak ada kalimat 2 kata di usia 2.5 tahun
-        - Gangguan pemahaman terhadap instruksi sederhana
+        FORMAT OUTPUT YANG DIMINTA:
+        - Jawaban dalam bentuk HTML rapi
+        - Gunakan elemen seperti: <h2>, <h3>, <ul>, <ol>, <p>
+        - Gunakan <strong> atau <em> bila perlu untuk menegaskan poin penting
+        - Bahasa Indonesia
 
-        Lalu, berikan saran singkat untuk orang tua tentang langkah selanjutnya.
-
-        **Tampilkan hasil analisis langsung dalam format HTML yang rapi dan mudah dibaca di web (gunakan elemen seperti <h2>, <ul>, <p>, dan <strong>)**. Jangan pakai tag <html>, <head>, atau <body>. Cukup bagian isi yang siap ditampilkan.`;
-
+        Tampilkan hasil analisis dan rekomendasi sejelas dan seringkas mungkin.
+        `;
 
         try {
             const response = await fetch('/api/generate', {
@@ -52,15 +52,14 @@ const SurveyDeteksi = () => {
 
             const data = await response.json();
             if (response.ok) {
-                setResult(data.output);
                 const encoded = encodeURIComponent(JSON.stringify(data.output));
                 router.push(`/result?data=${encoded}`);
             } else {
-                setResult(data.error || 'Terjadi kesalahan.');
+                console.log(data.error || 'Terjadi kesalahan.');
             }
         } catch (error) {
             console.error(error);
-            setResult('Gagal memuat hasil analisis.');
+            console.log('Gagal memuat hasil analisis.');
         }
     };
 
