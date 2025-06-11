@@ -11,7 +11,7 @@ const ResultPage = () => {
             <Result />
             <Footer />
         </div>
-    )
-}
+    );
+};
 
 export default ResultPage;
