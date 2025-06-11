@@ -21,7 +21,6 @@ const ResultPage = () => {
 
     return (
         <div className='p-10'>
-            <h1 className='text-2xl font-bold mb-4'>Hasil Analisis</h1>
             {result && (
                 <div className="prose max-w-none" dangerouslySetInnerHTML={{ __html: result }} />
             )}
