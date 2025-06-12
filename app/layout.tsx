@@ -21,6 +21,9 @@ const kronaOne = Krona_One({
 export const metadata: Metadata = {
   title: "bayicara",
   description: "Apilkasi untuk membantu orang tua dalam mendukung perkembangan bicara anak",
+  icons: {
+    icon: "/logo.png",
+  },
 };
 
 export default function RootLayout({
