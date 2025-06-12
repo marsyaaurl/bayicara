@@ -12,16 +12,15 @@ interface PageProps {
   }>;
 }
 
-// Change the component to an async function
 const DetailedMilestonePage = async ({ params }: PageProps) => {
-  const resolvedParams = await params; // Await the params
+  const resolvedParams = await params;
 
   const currentMilestone = milestone.find(
     (item) => item.milestone_id === Number(resolvedParams.milestone_id)
   );
 
   if (!currentMilestone) {
-    notFound(); // Handle the case where the milestone is not found
+    notFound(); 
   }
 
   return (

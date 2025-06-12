@@ -15,7 +15,7 @@ export default function MilestoneCard({ milestone }: { milestone: Milestone }) {
   return (
     <div className="w-full bg-white rounded-2xl shadow-md p-6 flex flex-col gap-6 border border-gray-200">
       {/* Header */}
-      <div className="flex items-start gap-4">
+      <div className="flex items-start sm:items-center gap-4">
         {/* Age badge */}
         <div className="bg-primary text-white px-4 py-3 rounded-xl flex flex-col items-center justify-center min-w-[100px]">
           <div className="text-xl font-bold bg-transparent">{milestone.usia}</div>

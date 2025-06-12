@@ -12,7 +12,7 @@ export default function Footer() {
   return (
     <footer className="bg-primary text-white items-center justify-center px-10">
       <div className="container px-4 py-12 bg-transparent">
-        <div className="flex flex-col md:flex-row lg:grid-cols-4 gap-x-96 bg-transparent items-start justify-center">
+        <div className="flex flex-col md:flex-row lg:grid-cols-4 gap-y-14 sm:gap-x-96 bg-transparent items-start justify-center">
           
           <div className="space-y-4 bg-transparent">
             <Link 

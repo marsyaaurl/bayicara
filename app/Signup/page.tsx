@@ -3,10 +3,7 @@ import React, { useState } from 'react';
 import { supabase } from '@/lib/supabase';
 import NavbarNonLogin from "../components/NavbarNonLogin";
 
-// Tidak ada lagi import useRouter
-
 export default function Signup() {
-    // Tidak ada lagi const router = useRouter();
 
     const [data, setData] = useState({
         email: '',
@@ -55,7 +52,6 @@ export default function Signup() {
         }));
     };
 
-    // Bagian return JSX tidak ada perubahan
     return (
         <>
         <NavbarNonLogin />
