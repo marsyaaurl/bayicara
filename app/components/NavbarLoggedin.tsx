@@ -31,12 +31,6 @@ const NavbarLoggedin = () => {
         >
           Deteksi
         </Link>
-        <Link 
-          href="/profil" 
-          className="bg-transparent text-sm font-medium text-background hover:text-secondary"
-        >
-          Profil
-        </Link>
       </div>
     </nav>
   );

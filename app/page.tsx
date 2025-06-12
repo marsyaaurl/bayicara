@@ -1,14 +1,14 @@
 import Footer from "../app/components/Footer";
 import { HeartHandshake, Puzzle, Search } from "lucide-react";
 import Link from "next/link";
-import NavbarNonLogin from "./components/NavbarNonLogin";
+import NavbarLoggedin from "./components/NavbarLoggedin";
 
 export default function Home() {
   return (
     <div className="relative">
       
       <div className="relative z-50">
-        <NavbarNonLogin />
+        <NavbarLoggedin />
       </div>
 
       <div className="flex flex-col items-center justify-center h-[542px] text-center px-4 py-32 text-white bg-[url('/images/GetStartedBackground.png')] bg-cover bg-center">
@@ -19,7 +19,7 @@ export default function Home() {
         <p className="text-md sm:text-lg max-w-2xl bg-transparent">
           Stimulasi sejak dini dapat mencegah keterlambatan bicara, karena masa depan anak dimulai dari kata pertamanya.
         </p>
-        <Link href="/Signup" className="bg-transparent"><button className="mt-6 px-4 py-2 font-medium bg-secondary text-white rounded-full hover:bg-primary">
+        <Link href="/stimulasi" className="bg-transparent"><button className="mt-6 px-4 py-2 font-medium bg-secondary text-white rounded-full hover:bg-primary">
           Ayo Mulai
         </button></Link>
       </div>  
