@@ -5,7 +5,6 @@ const HeaderStimulasi = () => {
             <h1 className="text-3xl font-bold mb-1 bg-transparent">Stimulasi Bicara</h1>
             <p className="text-md font-normal bg-transparent">
                 Bantu perkembangan bicara anak sejak dini melalui aktivitas menyenangkan dan penuh interaksi. 
-                Temukan cara kreatif untuk merangsang kemampuan komunikasinya setiap hari.
             </p>
             </div>
         </div>
