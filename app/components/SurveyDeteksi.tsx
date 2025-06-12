@@ -77,30 +77,32 @@ const SurveyDeteksi = () => {
                     <div className='flex flex-col gap-y-2'>
                         {item.options.map((option, index) => (
                             <button
-                                key={index}
-                                className={`flex gap-x-2 border rounded-xl bg-transparent p-2 ${
-                                answer[item.question_id] === option.value ? 'border-primary border-2 text-white' : 'border-gray-300 bg-white'
+                            key={index}
+                            className={`flex items-start gap-x-2 border items-center rounded-xl bg-transparent p-2 text-left ${
+                                answer[item.question_id] === option.value
+                                ? 'border-primary border-2 text-white'
+                                : 'border-gray-300 bg-white'
+                            }`}
+                            onClick={() => {
+                                setAnswer((prev) => ({
+                                ...prev,
+                                [item.question_id]: option.value,
+                                }));
+                            }}
+                            >
+                            <h3
+                                className={`rounded-full px-4 py-2 text-background ${
+                                answer[item.question_id] === option.value
+                                    ? 'bg-primary'
+                                    : 'bg-gray-300'
                                 }`}
-                                onClick={() => {
-                                    setAnswer((prev) => ({
-                                    ...prev,
-                                    [item.question_id]: option.value,
-                                    }));
-                                }}
-                                >
-                                <h3
-                                    className={`rounded-full px-4 py-2 text-background ${
-                                    answer[item.question_id] === option.value
-                                        ? 'bg-primary'
-                                        : 'bg-gray-300'
-                                    }`}
-                                >
-                                    {String.fromCharCode(65 + index)}
-                                </h3>
-                                <h3 className='text-black'>{option.label}</h3>
-                                </button>
+                            >
+                                {String.fromCharCode(65 + index)}
+                            </h3>
+                            <h3 className='text-black text-left'>{option.label}</h3>
+                            </button>
                         ))}
-                    </div>
+                        </div>
                 </div>
             ))}
 
