@@ -13,9 +13,9 @@ const NavbarLoggedin = () => {
       
       <Link 
         href="/" 
-        className={`${kronaOne.className} bg-transparent text-background text-2xl tracking-wider`}
+        className={`${kronaOne.className} bg-transparent text-background text-xl sm:text-2xl tracking-wider`}
       >
-        bay<span className='text-3xl bg-transparent'>i</span>cara
+        bay<span className='text-lg sm:text-3xl bg-transparent'>i</span>cara
       </Link>
 
       <div className="flex items-center gap-x-6 bg-transparent">

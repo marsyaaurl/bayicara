@@ -78,7 +78,7 @@ const SurveyDeteksi = () => {
                         {item.options.map((option, index) => (
                             <button
                                 key={index}
-                                className={`flex items-center gap-x-2 border rounded-xl bg-transparent p-2 ${
+                                className={`flex gap-x-2 border rounded-xl bg-transparent p-2 ${
                                 answer[item.question_id] === option.value ? 'border-primary border-2 text-white' : 'border-gray-300 bg-white'
                                 }`}
                                 onClick={() => {
