@@ -22,7 +22,7 @@ export const metadata: Metadata = {
   title: "bayicara",
   description: "Apilkasi untuk membantu orang tua dalam mendukung perkembangan bicara anak",
   icons: {
-    icon: "/logo.png",
+    icon: "/logo.png",  
   },
 };
 
@@ -33,6 +33,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${poppins.variable} ${kronaOne.variable}`}>
+      <head>
+        <link rel="icon" href="/logo.png" />
+      </head>
       <body>{children}</body>
     </html>
   );
