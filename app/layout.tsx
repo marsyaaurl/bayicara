@@ -20,21 +20,25 @@ const kronaOne = Krona_One({
 
 export const metadata: Metadata = {
   title: "bayicara",
-  description: "Apilkasi untuk membantu orang tua dalam mendukung perkembangan bicara anak",
+  description:
+    "Aplikasi untuk membantu orang tua dalam mendukung perkembangan bicara anak",
   icons: {
-    icon: "/logo.png",  
+    icon: [
+      { url: "/logo.png", type: "image/png" }, // favicon untuk tab browser
+    ],
   },
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
     <html lang="en" className={`${poppins.variable} ${kronaOne.variable}`}>
       <head>
-        <link rel="icon" href="/logo.png" />
+        {/* fallback tambahan untuk favicon */}
+        <link rel="icon" type="image/png" href="/logo.png" />
       </head>
       <body>{children}</body>
     </html>
