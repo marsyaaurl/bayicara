@@ -90,7 +90,7 @@ const ClientStoryGenerator = ({ milestone }: Props) => {
                     />
                     <button
                         onClick={generateText}
-                        className='px-5 bg-secondary rounded-lg h-8 font-semibold mb-5 text-background'
+                        className='px-5 bg-secondary rounded-lg h-8 font-semibold mb-5 text-background hover:bg-primary'
                     >
                         Buat Cerita
                     </button>

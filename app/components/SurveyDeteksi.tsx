@@ -108,7 +108,7 @@ const SurveyDeteksi = () => {
 
             <Link href=""><button
                 onClick={handleSubmit}
-                className='bg-primary w-full rounded-lg text-background font-semibold px-3 py-2'
+                className='bg-secondary w-full rounded-lg text-background font-semibold px-3 py-2 hover:bg-primary'
             >
                 Submit
             </button></Link>
