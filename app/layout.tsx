@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   title: "bayicara",
   description: "Aplikasi untuk membantu orang tua dalam mendukung perkembangan bicara anak",
   icons: {
-    icon: "/logo.png",
+    icon: "/favicon.ico",
   },
 };
 
@@ -17,7 +17,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={`${poppins.variable} ${kronaOne.variable}`}>
       <head>
-        <link rel="icon" href="/logo.png" type="image/png" />
+        <link rel="icon" href="/favicon.ico" type="image/ico" />
       </head>
       <body>{children}</body>
     </html>
